@@ -1,0 +1,105 @@
+{% block content %}
+{% include "header.html" %}
+
+<section class="vh-100 tasks-page-custom">
+  <div class="container-fluid py-5 h-100 general-container">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-10 col-sm-12">
+        <div class="card mask-custom" id="working-list">
+
+<!--          nav tabs-->
+          <div>
+            <ul class="nav nav-tabs mb-1 pb-2" id="active-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link text-white" data-mdb-toggle="tab"
+                     href="{{ url_for('active_tasks')}}" role="tab"
+                    aria-selected="false">Active</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link text-white" data-mdb-toggle="tab"
+                     href="{{ url_for('completed_tasks') }}" role="tab"
+                    aria-selected="false">Completed</a>
+                </li>
+              </ul>
+          </div>
+            <div class="card-body text-white p-4">
+
+            <div class="text-center pt-2 pb-2">
+                <i class="bi bi-code-slash code-icon"></i>
+                <h2 class="my-4" style="color: yellow;">Active Tasks</h2>
+
+            </div>
+              <div class="scrollable" id="scroll-section">
+                <table class="table text-white text-center">
+<!--                  table head-->
+                  <thead>
+                    <tr class="fw-bolder">
+                      <th scope="col" style="text-align: left!important;">Deadline</th>
+                      <th scope="col" style="width: 250px;">Task</th>
+                      <th scope="col" class="d-none d-md-table-cell">Priority</th>
+                      <th scope="col" style="text-align: right!important;">Actions</th>
+                    </tr>
+                  </thead>
+
+<!--                  table body-->
+                  <tbody class="align-middle">
+<!--                  for active tasks db-->
+                  {% for task in active_tasks: %}
+                  <tr>
+                    <td style="text-align: left!important; padding-right:0px;">{{task.deadline}}</td>
+
+                    <td>
+                        <button type="button" class="btn btn-light description-button" data-bs-toggle="popover"
+                                title="Task Details - {{ task.priority }}"
+                                data-bs-content="{{ task.description }}"> {{ task.title }}
+                        </button>
+                    </td>
+
+                    <td class="d-none d-md-table-cell">
+                        {% if task.priority == "High Priority": %}
+                      <span class="badge bg-danger">{{ task.priority }}</span>
+                        {% elif task.priority == "Medium Priority": %}
+                      <span class="badge bg-warning">{{ task.priority }}</span>
+                        {% else: %}
+                      <span class="badge bg-success">{{ task.priority }}</span>
+                        {% endif %}
+                    </td>
+
+                    <td style="text-align: right!important; padding: 8px 0px 8px 0px;">
+                      <a href="{{ url_for('edit_task_page', id=task.id, status='active')}}" data-mdb-toggle="tooltip" title="Edit">
+                          <i class="bi bi-pencil-square edit-icon"></i></a>
+
+                      <a href="{{ url_for('complete_task', id=task.id) }}" data-mdb-toggle="tooltip" title="Complete">
+                        <i class="bi bi-check-lg check-icon"></i></a>
+
+                      <a href="{{ url_for('delete_task', id=task.id, status='active') }}" data-mdb-toggle="tooltip" title="Remove">
+                        <i class="bi bi-trash trash-icon"></i>
+                      </a>
+                    </td>
+                  </tr>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+
+{% block content %}
+{% include "header.html" %}
+
+<section class="vh-100 edit-page-custom"
+         style="background-image: linear-gradient(to right top, #3cdabe, #26d7cc, #19d4d7, #24d0e1, #3acbe7, #41c4e2, #47bedd, #4cb7d7, #44adc8, #3ea3b9, #3899ab, #338f9d);
+                overflow-y: hidden;
+                height: auto !important;min-height: 100%;
+                min-height: 710px;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+
+        <div class="card">
+          <div class="card-body p-5">
+            <h4 class="text-center pb-3"> Current task details are below: </h4>
+            <form class="d-flex justify-content-center align-items-center mb-4"
+                  action="{{ url_for('edit_current_task', id=task.id, status=status) }}"
+                  method="post">
+              <div class="form-outline flex-fill">
+                <label for="deadline">Current Deadline: {{ task.deadline }}</label>
+                <input type="date" required class="form-control" name="deadline" min="2022-05-05">
+
+                <label style="margin-top:20px;" for="title">Current Task Title: {{ task.title }}:</label>
+                <input type="text" required name="title" class="form-control"/>
+
+                <label style="margin-top:20px;" for="description">Current Task Description: {{ task.description }}</label>
+                <input type="text" required name="description" class="form-control"/>
+
+                <label style="margin-top:20px;" for="priority">Current Task Priority: {{ task.priority }}</label>
+                <select class="form-select" required name="priority" aria-label="Default select example">
+                  <option name="value1">High Priority</option>
+                  <option name="value2">Medium Priority</option>
+                  <option name="value3">Low Priority</option>
+                </select>
+                <button type="submit" class="btn btn-dark w-20 mt-2" style="float: right;">Edit Task</button>
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+{% endblock %}

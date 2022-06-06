@@ -1,0 +1,21 @@
+{% block content %}
+{% include "header.html" %}
+
+<section class="vh-100 d-flex justify-content-center align-items-center home-page-custom">
+  <div class="row pb-5">
+    <div class="col text-center">
+      <div class="card-body">
+        <h3 class="text-center pb-5 text-white" style="margin:0 auto"> Welcome to <span style="color: #FF7900;">TODOtracker!</span> </h3>
+        <h4 class="text-center pb-3" style="margin:0 auto; color:#CFCFCF;"> You can track your tasks each day and make your job easier!</h4>
+        <h5 class="text-center pb-3" style="margin:0 auto; color:#C4C4C4;"> Ready to get started?</h5>
+        <a type="button" href="{{ url_for('add_task')}}" class="btn btn-lg btn-dark">Lets Create a TODO List!</a>
+        <h5 class="text-center pt-4" style="margin:0 auto; color:#C4C4C4;"> Already have a TODO list?</h5>
+        <a type="button" href="{{ url_for('active_tasks')}}" class="btn btn-lg btn-dark mt-3">Go to MyTasks!</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

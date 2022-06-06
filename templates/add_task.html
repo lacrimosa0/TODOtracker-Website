@@ -1,0 +1,45 @@
+
+{% block content %}
+{% include "header.html" %}
+
+<section class="vh-100 add-task-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+
+        <div class="card">
+          <div class="card-body p-5">
+            <h4 class="text-center pb-3"> Please fill the form to add task </h4>
+            <form class="d-flex justify-content-center align-items-center mb-4"
+                  action="{{ url_for('add_task') }}"
+                  method="post">
+              <div class="form-outline flex-fill">
+                <label for="deadline">Set Deadline:</label>
+                <input type="date" required class="form-control" name="deadline" min="2022-05-05">
+
+                <label style="margin-top:20px;" for="title">Set Task Title:</label>
+                <input type="text" required name="title" class="form-control"/>
+
+                <label style="margin-top:20px;" for="description">Set Task Description:</label>
+                <input type="text" required name="description" class="form-control"/>
+
+                <label style="margin-top:20px;" for="priority">Set Task Priority:</label>
+                <select class="form-select" required name="priority" aria-label="Default select example">
+                  <option name="value1">High Priority</option>
+                  <option name="value2">Medium Priority</option>
+                  <option name="value3">Low Priority</option>
+                </select>
+                <button type="submit" class="btn btn-dark w-20 mt-2" style="float: right;">Add Task</button>
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
